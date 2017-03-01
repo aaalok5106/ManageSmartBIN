@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/activity_login"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="@dimen/activity_horizontal_margin"
+android:paddingRight="@dimen/activity_horizontal_margin"
+android:paddingTop="@dimen/activity_vertical_margin"
+tools:context="com.mridul.managesmartbin.LoginActivity">
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textEmailAddress"
+    android:ems="10"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="98dp"
+    android:hint="Email"
+    android:id="@+id/login_email" />
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:inputType="textPassword"
+    android:ems="10"
+    android:layout_below="@+id/login_email"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="11dp"
+    android:hint="Password"
+    android:id="@+id/login_password" />
+
+<Button
+    android:text="Sign In"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/login_password"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="61dp"
+    android:id="@+id/login_signin"
+    android:onClick="activity_afterlogin"/>
+
+<Button
+    android:text="Register"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/login_signin"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="32dp"
+    android:id="@+id/login_register"
+    android:onClick="registerLayout"/>
+
+    <Button
+        android:text="goto AfterLogin activity!!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_tmp_afterlogin"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:onClick="gotoAfterLogin"/>
+
+
+</RelativeLayout>
