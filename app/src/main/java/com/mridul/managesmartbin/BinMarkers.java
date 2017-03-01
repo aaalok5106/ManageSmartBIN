@@ -197,6 +197,9 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
                     .title("BIN ID...");
             mGoogleMap.addMarker(options);
         }
+
+        //below commented part was also for placing bin markers...may not work properly
+
      /*   GoogleApiClient mGoogleApiClient = new GoogleApiClient.Builder(this).build();
 
             String placeId = "ChIJ7dgFMOwtbzwRHACl6jeYr2Q" ; //placeid_array.get(i).toString();
