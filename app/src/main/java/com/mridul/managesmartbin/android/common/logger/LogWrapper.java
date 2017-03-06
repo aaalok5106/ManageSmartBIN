@@ -7,8 +7,7 @@ package com.mridul.managesmartbin.android.common.logger;
 import android.util.Log;
 
 /**
- * Helper class which wraps Android's native Log utility in the Logger interface.  This way
- * normal DDMS output can be one of the many targets receiving and outputting logs simultaneously.
+ * Helper class which wraps Android's native Log utility in the Logger interface.
  */
 public class LogWrapper implements LogNode {
 
@@ -46,7 +45,7 @@ public class LogWrapper implements LogNode {
             useMsg = "";
         }
 
-        // If an exeption was provided, convert that exception to a usable string and attach
+        // If an exception was provided, convert that exception to a usable string and attach
         // it to the end of the msg method.
         if (tr != null) {
             msg += "\n" + Log.getStackTraceString(tr);

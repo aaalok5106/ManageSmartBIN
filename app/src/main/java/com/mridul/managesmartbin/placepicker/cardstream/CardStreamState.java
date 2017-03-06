@@ -7,7 +7,7 @@ package com.mridul.managesmartbin.placepicker.cardstream;
 import java.util.HashSet;
 
 /**
- * A struct object that holds the state of a {@link CardStreamFragment}.
+ * A struct object that holds the state of a  CardStreamFragment .
  */
 public class CardStreamState {
     protected Card[] visibleCards;

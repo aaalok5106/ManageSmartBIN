@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,13 +23,15 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * Created by Mridul on 13-02-2017.
+ * Presently this class is used to fetch data from server for login and user_registration.
  */
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
+//    public String TYPE = "";
+
     Context context;
-    AlertDialog alertDialog;
+    //AlertDialog alertDialog;
     BackgroundWorker(Context context1){
         context = context1;
     }
@@ -35,8 +39,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://172.16.187.234/login.php";
-        String register_url = "http://172.16.187.234/register.php";
+//        TYPE = "" + params[0];
+        String login_url = "http://172.16.187.152/login.php";
+        String register_url = "http://172.16.187.152/register.php";
 
         if (type.equals("login")) {
             String email = params[1];
@@ -127,16 +132,35 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status...");
+
+        //alertDialog = new AlertDialog.Builder(context).create();
+        //alertDialog.setTitle("Status");
+
     }
 
     @Override
     protected void onPostExecute(String result) {
 
-        alertDialog.setMessage(result);
-        alertDialog.show();
-        // AfterLoginLayout();
+        //alertDialog.setMessage(result);
+        //alertDialog.show();
+        Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+
+        if(result.equals("You are successfully Logged In")) {
+            /**
+             * on successful log in , opening AfterLogin Activity...
+             */
+
+            openAfterLogin();
+        }
+        else {
+            /**
+             * else returning to login page again...
+             * After registration , also , returning to login activity...
+             */
+
+            gotoLoginLayout();
+        }
+
         //alertDialog.dismiss();
 
     }
@@ -146,5 +170,15 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         super.onProgressUpdate(values);
     }
 
+
+    public void openAfterLogin() {
+        Intent intent = new Intent(context,AfterLogin.class);
+        context.startActivity(intent);
+    }
+
+    public void gotoLoginLayout() {
+        Intent intent = new Intent(context,LoginActivity.class);
+        context.startActivity(intent);
+    }
 
 }

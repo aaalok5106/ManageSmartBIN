@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * This class will be used to register a user and stores user_data on the server.
+ */
+
 public class Register extends AppCompatActivity {
 
     EditText name, email, mob_no, password;

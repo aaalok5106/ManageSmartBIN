@@ -22,6 +22,8 @@ import java.net.URLEncoder;
 
 /**
  * Created by Mridul on 13-02-2017.
+ * For uploading data of a newly installed bin on server...
+ * This class is used in PickerHome .
  */
 
 public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
@@ -40,7 +42,7 @@ public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 
-        String bin_register_url = "http://172.16.187.234/install_bin.php";
+        String bin_register_url = "http://172.16.187.152/install_bin.php";
 
         if (type.equals("installBinData")){
             String placeId = params[1];
@@ -94,7 +96,7 @@ public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Bin Installation Status...");
+        alertDialog.setTitle("Bin Installation Status");
     }
 
     @Override

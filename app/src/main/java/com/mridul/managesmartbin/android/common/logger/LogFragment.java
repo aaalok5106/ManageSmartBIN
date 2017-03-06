@@ -20,7 +20,7 @@ import android.widget.ScrollView;
  * through the LogNode interface.
  */
 public class LogFragment extends Fragment {
-
+/*
     private com.mridul.managesmartbin.android.common.logger.LogView mLogView;
     private ScrollView mScrollView;
 
@@ -82,4 +82,5 @@ public class LogFragment extends Fragment {
     public LogView getLogView() {
         return mLogView;
     }
+*/
 }

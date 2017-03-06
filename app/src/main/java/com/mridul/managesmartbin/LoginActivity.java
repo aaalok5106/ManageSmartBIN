@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * This class is for opening first activity just after you opens the app.
+ * it will open registration activity if you want to register.
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText email, password ;
@@ -33,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this,Register.class));
     }
 
-    public void gotoAfterLogin(View view){
+/*    public void gotoAfterLogin(View view){
         startActivity(new Intent(this,AfterLogin.class));
-    }
+    }*/
 
 }

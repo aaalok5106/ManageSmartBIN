@@ -27,18 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Sample demonstrating the use of {@link PlacePicker}.
- * This sample shows the construction of an {@link Intent} to open the PlacePicker from the
- * Google Places API for Android and select a {@link Place}.
- *
- * This sample uses the CardStream sample template to create the UI for this demo, which is not
- * required to use the PlacePicker API. (Please see the Readme-CardStream.txt file for details.)
- *
- * @see PlacePicker.IntentBuilder
- * @see PlacePicker
- * @see Place
- */
+
 public class PlacePickerFragment extends Fragment implements OnCardClickListener {
 
     private static final String TAG = "PlacePickerSample";
@@ -118,12 +107,12 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
     /**
      * Extracts data from PlacePicker result.
      * This method is called when an Intent has been started by calling
-     * {@link #startActivityForResult(Intent, int)}. The Intent for the
-     * {@link PlacePicker} is started with
-     * {@link #REQUEST_PLACE_PICKER} request code. When a result with this request code is received
-     * in this method, its data is extracted by converting the Intent data to a {@link Place}
+     * { #startActivityForResult(Intent, int)}. The Intent for the
+     * { PlacePicker} is started with
+     * { #REQUEST_PLACE_PICKER} request code. When a result with this request code is received
+     * in this method, its data is extracted by converting the Intent data to a { Place}
      * through the
-     * {@link PlacePicker#getPlace(Intent,
+     * { PlacePicker#getPlace(Intent,
      * android.content.Context)} call.
      *
      * @param requestCode
@@ -163,13 +152,13 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
                     attribution = "";
                 }
 
-                //updating data on server.
+                //updating data on server with the use of BackgroundWorkerPicker class .
                 String type = "installBinData";
                 BackgroundWorkerPicker backgroundWorker = new BackgroundWorkerPicker(getContext());
                 backgroundWorker.execute(type,placeId,name,address,lat.toString(),lng.toString());
 
 
-                // Update data on card.
+                // Update data on card to show which place is selected .
                 getCardStream().getCard(CARD_DETAIL)
                         .setTitle(name.toString())
                         .setDescription(getString(R.string.detail_text, placeId, address, phone,
@@ -178,7 +167,7 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
                 // Print data to debug log
                 Log.d(TAG, "Place selected: " + placeId + " (" + name.toString() + ")");
 
-                // Show the card.
+                // Show the card with selected place .
                 getCardStream().showCard(CARD_DETAIL);
 
             } else {
@@ -205,7 +194,7 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
                 .build(getActivity());
         getCardStream().addCard(c, false);
 
-        // Add detail card.
+        // Add detail card for showing selected place .
         c = new Card.Builder(this, CARD_DETAIL)
                 .setTitle(getString(R.string.empty))
                 .setDescription(getString(R.string.empty))
@@ -224,7 +213,7 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
      * Sets the visibility of the 'Pick Action' option on the 'Pick a place' card.
      * The action should be hidden when the PlacePicker Intent has been fired to prevent it from
      * being launched multiple times simultaneously.
-     * @param show
+     *
      */
     private void showPickAction(boolean show){
         mCards.getCard(CARD_PICKER).setActionVisibility(ACTION_PICK_PLACE, show);
@@ -232,7 +221,7 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
 
     /**
      * Returns the CardStream.
-     * @return
+     *
      */
     private CardStreamFragment getCardStream() {
         if (mCards == null) {

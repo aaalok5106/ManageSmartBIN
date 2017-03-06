@@ -19,8 +19,7 @@ import com.mridul.managesmartbin.R;
 
 /**
  * A Fragment that handles a stream of cards.
- * Cards can be shown or hidden. When a card is shown it can also be marked as not-dismissible, see
- * {@link CardStreamLinearLayout#addCard(View, boolean)}.
+ * Cards can be shown or hidden. When a card is shown it can also be marked as not-dismissible
  */
 public class CardStreamFragment extends Fragment {
 
@@ -83,7 +82,6 @@ public class CardStreamFragment extends Fragment {
      * Remove a card and return true if it has been successfully removed.
      *
      * @param tag
-     * @return
      */
     public boolean removeCard(String tag) {
         // Attempt to remove a visible card first
@@ -104,7 +102,6 @@ public class CardStreamFragment extends Fragment {
      * Show a dismissible card, returns false if the card could not be shown.
      *
      * @param tag
-     * @return
      */
     public boolean showCard(String tag) {
         return showCard(tag, true);
@@ -115,7 +112,6 @@ public class CardStreamFragment extends Fragment {
      *
      * @param tag
      * @param dismissible
-     * @return
      */
     public boolean showCard(String tag, boolean dismissible) {
         final Card card = mHiddenCards.get(tag);
@@ -136,7 +132,6 @@ public class CardStreamFragment extends Fragment {
      * Hides the card, returns false if the card could not be hidden.
      *
      * @param tag
-     * @return
      */
     public boolean hideCard(String tag) {
         final Card card = mVisibleCards.get(tag);
@@ -170,7 +165,6 @@ public class CardStreamFragment extends Fragment {
      * Returns true if the card is shown and is dismissible.
      *
      * @param tag
-     * @return
      */
     public boolean isCardDismissible(String tag) {
         return mDismissibleCards.contains(tag);
@@ -180,7 +174,6 @@ public class CardStreamFragment extends Fragment {
      * Returns the Card for this tag.
      *
      * @param tag
-     * @return
      */
     public Card getCard(String tag) {
         final Card card = mVisibleCards.get(tag);
@@ -195,7 +188,6 @@ public class CardStreamFragment extends Fragment {
      * Moves the view port to show the card with this tag.
      *
      * @param tag
-     * @see CardStreamLinearLayout#setFirstVisibleCard(String)
      */
     public void setFirstVisibleCard(String tag) {
         final Card card = mVisibleCards.get(tag);

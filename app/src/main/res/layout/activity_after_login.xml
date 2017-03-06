@@ -28,14 +28,14 @@ tools:context="com.mridul.managesmartbin.AfterLogin">
     android:id="@+id/button_place_picker" />
 
 <Button
-    android:text="not working"
+    android:text="Route maker"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
     android:layout_marginBottom="32dp"
     android:id="@+id/button"
-    android:onClick="gotoLoginLayout"/>
+    android:onClick="gotoPathMakerLayout"/>
 
 
 </RelativeLayout>

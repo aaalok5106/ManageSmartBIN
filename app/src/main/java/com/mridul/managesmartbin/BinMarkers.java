@@ -1,16 +1,5 @@
 package com.mridul.managesmartbin;
 
-/*import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-public class BinMarkers extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bin_markers);
-    }
-}*/
 import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -64,10 +53,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * This class is used to mark all rhe bins on the map.
+ */
+
 public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
-    String url = "http://172.16.187.234/123.php";
+    String url = "http://172.16.187.152/123.php";
 
     ArrayList<String> lat=new ArrayList<>();    //used in downloader() fn.
     ArrayList<String> lng=new ArrayList<>();    //used in downloader() fn.
@@ -114,9 +108,9 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        gotoLocationZoom(25.536014,84.8488763, 3);
+        gotoLocationZoom(25.536014,84.8488763, 10);
 
-    /*    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -126,7 +120,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mGoogleMap.setMyLocationEnabled(true);*/
+        mGoogleMap.setMyLocationEnabled(true);
 
     }
 
@@ -145,7 +139,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
     //function used to search for an entered place on the map...
 
-    public void geoLocate(View view) throws IOException {
+/*    public void geoLocate(View view) throws IOException {
 
         EditText et = (EditText)findViewById(R.id.editText);
         String location = et.getText().toString();
@@ -169,6 +163,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
                 .snippet("This is myMarker");
         mGoogleMap.addMarker(options);
     }
+    */
 
 
     // function used to show the positions of installed bins using markers ...
@@ -228,7 +223,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
 
 
-
+    // method used to download bin_details( lat, lng, id ) from server.
     public void downloader(String address){
         //connect & get string of data.
         InputStream is = null;

@@ -16,7 +16,7 @@ import android.widget.Button;
 /**
  * Custom Button with a special 'pressed' effect for touch events.
  */
-public class CardActionButton extends Button {
+public class CardActionButton extends android.support.v7.widget.AppCompatButton {
 
     public CardActionButton(Context context) {
         super(context);

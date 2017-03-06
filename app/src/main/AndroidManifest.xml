@@ -6,12 +6,12 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -21,8 +21,6 @@
         android:required="true" />
 
     <application
-
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -35,8 +33,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbXwv3GuqZXj5UXn6LZeB-GhAn6OtQ9NQ" />
 
-    <!--    <meta-data android:name="android.support.multidex.MultiDexApplication"/> -->
-
+        <!-- <meta-data android:name="android.support.multidex.MultiDexApplication"/> -->
 
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -48,7 +45,8 @@
         <activity android:name=".AfterLogin" />
         <activity android:name=".Register" />
         <activity android:name=".BinMarkers" />
-        <activity android:name=".placepicker.PickerHome"></activity>
+        <activity android:name=".placepicker.PickerHome" />
+        <activity android:name=".PathMaker"></activity>
     </application>
 
 </manifest>

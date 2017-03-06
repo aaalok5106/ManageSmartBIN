@@ -19,6 +19,11 @@ import com.mridul.managesmartbin.placepicker.cardstream.CardStreamState;
 import com.mridul.managesmartbin.placepicker.cardstream.OnCardClickListener;
 import com.mridul.managesmartbin.placepicker.cardstream.StreamRetentionFragment;
 
+/**
+ * class used to initiate Place Picker part of the app.
+ * it opens a simple layout prompting user to click on a button for opening google maps with a static marker.
+ */
+
 public class PickerHome extends SampleActivityBase implements CardStream {
     public static final String TAG = "MainActivity";
     public static final String FRAGTAG = "PlacePickerFragment";
