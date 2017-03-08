@@ -42,6 +42,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 //        TYPE = "" + params[0];
         String login_url = "http://172.16.176.98/login.php";
         String register_url = "http://172.16.176.98/register.php";
+        String delete_url = "http://172.16.176.98/deletebin.php";
 
         if (type.equals("login")) {
             String email = params[1];
@@ -126,6 +127,49 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(type.equals("deletebin")){
+
+
+            String binid = params[1];
+
+            URL url = null;
+            try {
+                url = new URL(delete_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postdata = URLEncoder.encode("bin_id", "UTF-8") + "=" + URLEncoder.encode(binid, "UTF-8");
+                bufferedWriter.write(postdata);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+
+
         }
         return null ;
     }
@@ -151,6 +195,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
              */
 
             openAfterLogin();
+        }else if(result.equals("Bin Has been Deleted")){
+            //BinMarkers binMarkers = new BinMarkers();
+          //  afterbindelete();
         }
         else {
             /**
@@ -180,5 +227,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         Intent intent = new Intent(context,LoginActivity.class);
         context.startActivity(intent);
     }
+   // public void afterbindelete(){
+   //     Intent intent = new Intent(context , BinMarkers.class);
+   //     context.startActivity(intent);
+ //   }
 
 }

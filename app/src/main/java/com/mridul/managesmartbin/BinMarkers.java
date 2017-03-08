@@ -3,6 +3,7 @@ package com.mridul.managesmartbin;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -10,12 +11,15 @@ import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.DialogInterface;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -30,6 +34,7 @@ import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowLongClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
@@ -201,15 +206,40 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
         }
 
-        mGoogleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
+        mGoogleMap.setOnInfoWindowLongClickListener(new OnInfoWindowLongClickListener() {
             @Override
             public void onInfoWindowLongClick(Marker marker) {
                 // Enter your code here to delete a bin data.
+                delete_bin(marker);
 
-                Toast.makeText(getApplicationContext(),"I am "+ marker.getTitle(),Toast.LENGTH_LONG).show();
             }
         });
+    }
 
+    public void delete_bin(Marker marker) {
+        final String binid = marker.getTitle();
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Are You sure, You want to remove bin");
+                alertDialogBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            BackgroundWorker backgroundWorker = new BackgroundWorker(BinMarkers.this);
+            backgroundWorker.execute("deletebin", binid);
+
+            //Toast.makeText(getApplicationContext() , "You Clicked delete" , Toast.LENGTH_SHORT).show();
+        }
+    });
+                alertDialogBuilder.setNegativeButton("Cancel" , new DialogInterface.OnClickListener(){
+        @Override
+        public void onClick(DialogInterface dialog , int which){
+            Toast.makeText(BinMarkers.this , "Clicked Cancel Button" , Toast.LENGTH_SHORT).show();
+
+        }
+    });
+    AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+    }
 
         //below commented part was also for placing bin markers...may not work properly
 
@@ -237,7 +267,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
                             places.release();
                         }
                     });*/
-    }
+    //}
 
 
 
