@@ -46,7 +46,7 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +107,8 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
 
     @Override
     public void onDirectionFinderStart() {
-        progressDialog = ProgressDialog.show(this, "Please wait.",
-                "Finding direction..!", true);
+        //progressDialog = ProgressDialog.show(this, "Please wait.",
+          //      "Finding direction..!", true);
 
      /*   if (originMarkers != null) {
             for (Marker marker : originMarkers) {
@@ -131,7 +131,7 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
 
     @Override
     public void onDirectionFinderSuccess(List<Route> routes) {
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         polylinePaths = new ArrayList<>();
         originMarkers = new ArrayList<>();
         destinationMarkers = new ArrayList<>();

@@ -6,8 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 
-import android.support.multidex.MultiDexApplication;
-
 
 import com.mridul.managesmartbin.R;
 import com.mridul.managesmartbin.android.common.activities.SampleActivityBase;

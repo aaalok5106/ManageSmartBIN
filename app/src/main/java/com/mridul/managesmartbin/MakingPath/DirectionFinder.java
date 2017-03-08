@@ -40,19 +40,19 @@ public class DirectionFinder {
 
     public void execute() throws UnsupportedEncodingException {
         listener.onDirectionFinderStart();
-        //new DownloadRawData().execute(createUrl());
+        new DownloadRawData().execute(createUrl());
 
         /**
          * Allowing network access in current thread...
          */
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
-        String link = createUrl();
-        String data = downloadRawData(link);
-        try {
+        //StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+        //String link = createUrl();
+        //String data = downloadRawData(createUrl());
+     /*   try {
             parseJSon(data);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -60,7 +60,7 @@ public class DirectionFinder {
         String urlOrigin = URLEncoder.encode(origin, "utf-8");
         String urlDestination = URLEncoder.encode(destination, "utf-8");
 
-        return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination + "&key=" + GOOGLE_API_KEY;
+        return DIRECTION_URL_API + "origin=" + urlOrigin + "&destination=" + urlDestination ;// + "&key=" + GOOGLE_API_KEY;
     }
 
 
@@ -70,7 +70,7 @@ public class DirectionFinder {
      * @return
      */
 
-    private String downloadRawData(String link){
+ /*   private String downloadRawData(String link){
         try {
             URL url = new URL(link);
             InputStream is = url.openConnection().getInputStream();
@@ -90,8 +90,8 @@ public class DirectionFinder {
             e.printStackTrace();
         }
         return null;
-    }
-/*
+    }*/
+
     private class DownloadRawData extends AsyncTask<String, Void, String> {
 
         @Override
@@ -127,7 +127,7 @@ public class DirectionFinder {
             }
         }
     }
-*/
+
 
     /**
      * Parsing JASON data downloaded
