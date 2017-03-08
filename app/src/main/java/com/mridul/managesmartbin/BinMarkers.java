@@ -33,6 +33,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -65,6 +66,8 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
     ArrayList<String> lat=new ArrayList<>();    //used in downloader() fn.
     ArrayList<String> lng=new ArrayList<>();    //used in downloader() fn.
+
+    ArrayList<String> binId=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +170,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
 
     // function used to show the positions of installed bins using markers ...
+    // This function will be called on Button Click.
 
     public void locateBin(View view) throws IOException{
 
@@ -183,15 +187,29 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
             double latitude = Double.parseDouble(lat.get(i).toString());
             double longitude = Double.parseDouble(lng.get(i).toString());
 
+            String BIN_ID = binId.get(i);
+
             Log.v("Latitude is", "" + latitude);
             Log.v("Longitude is", "" + longitude);
+            Log.v("binId is", "" + BIN_ID);
 
             MarkerOptions options = new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
                     .snippet("A Bin is HERE")
-                    .title("BIN ID...");
+                    .title(BIN_ID);
             mGoogleMap.addMarker(options);
+
         }
+
+        mGoogleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
+            @Override
+            public void onInfoWindowLongClick(Marker marker) {
+                // Enter your code here to delete a bin data.
+
+                Toast.makeText(getApplicationContext(),"I am "+ marker.getTitle(),Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         //below commented part was also for placing bin markers...may not work properly
 
@@ -257,14 +275,17 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
 
                 lat.clear();
                 lng.clear();
+                binId.clear();
 
                 for(int i=0; i<ja.length(); i++ ){
                     jo = ja.getJSONObject(i);
 
                     String latitude = jo.getString("lat");
                     String longitude = jo.getString("lng");
+                    String BIN_ID = jo.getString("bin_id");
                     lat.add(latitude);
                     lng.add(longitude);
+                    binId.add(BIN_ID);
                 }
 
             } catch (JSONException e) {

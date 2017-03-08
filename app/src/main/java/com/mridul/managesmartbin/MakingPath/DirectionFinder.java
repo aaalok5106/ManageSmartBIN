@@ -64,11 +64,7 @@ public class DirectionFinder {
     }
 
 
-    /**
-     * Downloading data in JSON format.
-     * @param link
-     * @return
-     */
+
 
  /*   private String downloadRawData(String link){
         try {
@@ -91,6 +87,10 @@ public class DirectionFinder {
         }
         return null;
     }*/
+
+    /**
+     * Class to download data using google direction api for making path between two points.
+     */
 
     private class DownloadRawData extends AsyncTask<String, Void, String> {
 
