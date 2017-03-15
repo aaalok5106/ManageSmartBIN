@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.app.Activity;
 import android.content.Intent;

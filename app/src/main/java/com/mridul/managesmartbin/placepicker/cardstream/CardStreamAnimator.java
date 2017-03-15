@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker.cardstream;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -73,7 +70,7 @@ abstract class CardStreamAnimator {
     /**
      * A simple CardStreamAnimator implementation which is used to turn animations off.
      */
-    public static class EmptyAnimator extends CardStreamAnimator {
+/*    public static class EmptyAnimator extends CardStreamAnimator {
 
         @Override
         public ObjectAnimator getInitalAnimator(Context context) {
@@ -99,7 +96,7 @@ abstract class CardStreamAnimator {
         public ObjectAnimator getSwipeOutAnimator(View view, float deltaX, float deltaY) {
             return null;
         }
-    }
+    }*/
 
 }
 

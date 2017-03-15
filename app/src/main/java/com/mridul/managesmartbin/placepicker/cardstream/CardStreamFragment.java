@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker.cardstream;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -83,7 +80,7 @@ public class CardStreamFragment extends Fragment {
      *
      * @param tag
      */
-    public boolean removeCard(String tag) {
+ /*   public boolean removeCard(String tag) {
         // Attempt to remove a visible card first
         Card card = mVisibleCards.get(tag);
         if (card != null) {
@@ -96,7 +93,7 @@ public class CardStreamFragment extends Fragment {
             card = mHiddenCards.remove(tag);
             return card != null;
         }
-    }
+    }*/
 
     /**
      * Show a dismissible card, returns false if the card could not be shown.
@@ -157,18 +154,18 @@ public class CardStreamFragment extends Fragment {
     }
 
 
-    public boolean isCardVisible(String tag) {
+ /*   public boolean isCardVisible(String tag) {
         return mVisibleCards.containsValue(tag);
-    }
+    }*/
 
     /**
      * Returns true if the card is shown and is dismissible.
      *
      * @param tag
      */
-    public boolean isCardDismissible(String tag) {
+ /*   public boolean isCardDismissible(String tag) {
         return mDismissibleCards.contains(tag);
-    }
+    }*/
 
     /**
      * Returns the Card for this tag.
@@ -189,20 +186,20 @@ public class CardStreamFragment extends Fragment {
      *
      * @param tag
      */
-    public void setFirstVisibleCard(String tag) {
+/*    public void setFirstVisibleCard(String tag) {
         final Card card = mVisibleCards.get(tag);
         if (card != null) {
             mLayout.setFirstVisibleCard(tag);
         }
-    }
+    }*/
 
     public int getVisibleCardCount() {
         return mVisibleCards.size();
     }
 
-    public Collection<Card> getVisibleCards() {
+ /*   public Collection<Card> getVisibleCards() {
         return mVisibleCards.values();
-    }
+    }*/
 
     public void restoreState(CardStreamState state, OnCardClickListener callback) {
         // restore hidden cards

@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
-    String url = "http://172.16.176.98/123.php";
+    String url = "http://172.16.189.253/123.php";
 
     ArrayList<String> lat=new ArrayList<>();    //used in downloader() fn.
     ArrayList<String> lng=new ArrayList<>();    //used in downloader() fn.
@@ -88,8 +88,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
         } else {
             //No maps available here.
         }
-
-
+        
     }
 
     private void initMap() {
@@ -116,7 +115,7 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        gotoLocationZoom(25.536014,84.8488763, 10);
+        gotoLocationZoom(25.536014,84.8488763, 8);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -217,14 +216,19 @@ public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback 
     }
 
     public void delete_bin(Marker marker) {
-        final String binid = marker.getTitle();
+
+        final Marker markerTemp = marker;
+
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("Are You sure, You want to remove bin");
                 alertDialogBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
+
             BackgroundWorker backgroundWorker = new BackgroundWorker(BinMarkers.this);
-            backgroundWorker.execute("deletebin", binid);
+            backgroundWorker.execute("deletebin", markerTemp.getTitle());
+
+            markerTemp.remove();
 
             //Toast.makeText(getApplicationContext() , "You Clicked delete" , Toast.LENGTH_SHORT).show();
         }

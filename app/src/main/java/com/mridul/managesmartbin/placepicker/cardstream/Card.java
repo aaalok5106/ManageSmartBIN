@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker.cardstream;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -187,35 +184,35 @@ public class Card {
      * Set the progress to the specified value. Only applicable if the card has a
      *  #PROGRESS_TYPE_NORMAL  progress type.
      */
-    public Card setProgress(int progress) {
+/*    public Card setProgress(int progress) {
         if (mCardProgress != null) {
             mCardProgress.setProgress(progress);
         }
         return this;
-    }
+    }*/
 
     /**
      * Set the range of the progress to 0...max. Only applicable if the card has a
      *  #PROGRESS_TYPE_NORMAL  progress type.
      */
-    public Card setMaxProgress(int max){
+/*    public Card setMaxProgress(int max){
         if (mCardProgress != null) {
             mCardProgress.setMax(max);
         }
         return this;
-    }
+    }*/
 
     /**
      * Set the label text for the progress if the card has a progress type of
      * { #PROGRESS_TYPE_NORMAL}, { #PROGRESS_TYPE_INDETERMINATE} or
      * { #PROGRESS_TYPE_LABEL}
      */
-    public Card setProgressLabel(String text) {
+/*    public Card setProgressLabel(String text) {
         if (mCardProgress != null) {
             mCardProgress.setProgressLabel(text);
         }
         return this;
-    }
+    }*/
 
     /**
      * Toggle the visibility of the progress section of the card. Only applicable if
@@ -223,14 +220,14 @@ public class Card {
      * { #PROGRESS_TYPE_NORMAL}, { #PROGRESS_TYPE_INDETERMINATE} or
      * { #PROGRESS_TYPE_LABEL}.
      */
-    public Card setProgressVisibility(boolean isVisible) {
+/*    public Card setProgressVisibility(boolean isVisible) {
         if (mCardProgress.progressView == null) {
             return this; // Card does not have progress
         }
         mCardProgress.progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
 
         return this;
-    }
+    }*/
 
     /**
      * Adds an action to this card during build time.
@@ -266,7 +263,7 @@ public class Card {
      * Toggles visibility of the action area of this Card through an animation.
      * @param isVisible
      */
-    public Card setActionAreaVisibility(boolean isVisible) {
+/*    public Card setActionAreaVisibility(boolean isVisible) {
         if (mActionAreaView == null) {
             return this; // Card does not have an action area
         }
@@ -292,7 +289,7 @@ public class Card {
                     });
         }
         return this;
-    }
+    }*/
 
 
     /**
@@ -329,14 +326,14 @@ public class Card {
     /**
      * Prepare the card to be stored for configuration change.
      */
-    public void prepareForConfigurationChange() {
+/*    public void prepareForConfigurationChange() {
         // Null out views.
         mCardView = null;
         for (CardAction action : mCardActions) {
             action.actionView = null;
         }
         mCardProgress.progressView = null;
-    }
+    }*/
 
     /**
      * Creates a new { #Card}.
@@ -404,7 +401,7 @@ public class Card {
          * Set the type of progress bar to display.
          * @param progressType
          */
-        public Builder setProgressType(int progressType) {
+/*        public Builder setProgressType(int progressType) {
             mCard.setProgressType(progressType);
             return this;
         }
@@ -430,7 +427,7 @@ public class Card {
         public Builder setStatus(int status) {
             mCard.setState(status);
             return this;
-        }
+        }*/
 
         public Card build(Activity activity) {
             LayoutInflater inflater = activity.getLayoutInflater();
@@ -475,10 +472,10 @@ public class Card {
          * Initialize data from the given card.
          * @param card
          */
-        public Builder cloneFromCard(Card card) {
+/*        public Builder cloneFromCard(Card card) {
             mCard = card.createShallowClone();
             return this;
-        }
+        }*/
 
         /**
          * Build the action views by inflating the appropriate layouts and setting the text and
@@ -601,39 +598,39 @@ public class Card {
          * Set the progress. Only useful for the type { #PROGRESS_TYPE_NORMAL}.
          * @param progress
          */
-        public void setProgress(int progress) {
+/*        public void setProgress(int progress) {
             currProgress = progress;
             final ProgressBar bar = getProgressBar();
             if (bar != null) {
                 bar.setProgress(currProgress);
                 bar.invalidate();
             }
-        }
+        }*/
 
         /**
          * Set the range of the progress to 0...max.
          * Only useful for the type { #PROGRESS_TYPE_NORMAL}.
          * @param max
          */
-        public void setMax(int max) {
+/*        public void setMax(int max) {
             maxValue = max;
             final ProgressBar bar = getProgressBar();
             if (bar != null) {
                 bar.setMax(maxValue);
             }
-        }
+        }*/
 
         /**
          * Set the label text that appears near the progress indicator.
          * @param text
          */
-        public void setProgressLabel(String text) {
+/*        public void setProgressLabel(String text) {
             label = text;
             final TextView labelView = getProgressLabel();
             if (labelView != null) {
                 labelView.setText(text);
             }
-        }
+        }*/
 
         /**
          * Set how progress is displayed.
@@ -661,7 +658,7 @@ public class Card {
             }
         }
 
-        private TextView getProgressLabel() {
+/*        private TextView getProgressLabel() {
             if (progressLabel != null) {
                 return progressLabel;
             } else if (progressView != null) {
@@ -670,7 +667,7 @@ public class Card {
             } else {
                 return null;
             }
-        }
+        }*/
 
         private ProgressBar getProgressBar() {
             if (progressBar != null) {

@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker.cardstream;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.animation.Animator;
 import android.animation.LayoutTransition;
@@ -182,11 +179,14 @@ public class CardStreamLinearLayout extends LinearLayout {
         initialize(attrs, 0);
     }
 
-    @SuppressLint("NewApi")
+
+    // Below was the constructor for the CardStreamLinearLayout class.
+
+    /*@SuppressLint("NewApi")
     public CardStreamLinearLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         initialize(attrs, defStyle);
-    }
+    }*/
 
     /**
      * add a card view w/ canDismiss flag.
@@ -351,7 +351,7 @@ public class CardStreamLinearLayout extends LinearLayout {
         mShowInitialAnimation = true;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    /*@TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void setCardStreamAnimator( CardStreamAnimator animators ){
 
         if( animators == null )
@@ -367,7 +367,7 @@ public class CardStreamLinearLayout extends LinearLayout {
             layoutTransition.setAnimator( LayoutTransition.DISAPPEARING,
                     mAnimators.getDisappearingAnimator(getContext()) );
         }
-    }
+    }*/
 
     /**
      * set a OnDismissListener which called when user dismiss a card.

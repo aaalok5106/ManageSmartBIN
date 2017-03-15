@@ -1,8 +1,5 @@
 package com.mridul.managesmartbin.placepicker.cardstream;
 
-/**
- * Created by Mridul on 01-03-2017.
- */
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -13,6 +10,8 @@ import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.BounceInterpolator;
+
+
 
 class DefaultCardStreamAnimator extends CardStreamAnimator {
 

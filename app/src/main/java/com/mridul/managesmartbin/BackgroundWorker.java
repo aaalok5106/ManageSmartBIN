@@ -40,9 +40,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 //        TYPE = "" + params[0];
-        String login_url = "http://172.16.176.98/login.php";
-        String register_url = "http://172.16.176.98/register.php";
-        String delete_url = "http://172.16.176.98/deletebin.php";
+        String login_url = "http://172.16.189.253/login.php";
+        String register_url = "http://172.16.189.253/register.php";
+        String delete_url = "http://172.16.189.253/deletebin.php";
 
         if (type.equals("login")) {
             String email = params[1];
@@ -195,9 +195,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
              */
 
             openAfterLogin();
+
         }else if(result.equals("Bin Has been Deleted")){
-            //BinMarkers binMarkers = new BinMarkers();
-          //  afterbindelete();
+
+            // Do nothing.
         }
         else {
             /**
@@ -227,9 +228,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         Intent intent = new Intent(context,LoginActivity.class);
         context.startActivity(intent);
     }
-   // public void afterbindelete(){
-   //     Intent intent = new Intent(context , BinMarkers.class);
-   //     context.startActivity(intent);
- //   }
+
 
 }
