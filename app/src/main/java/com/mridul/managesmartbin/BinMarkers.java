@@ -67,7 +67,7 @@ import java.util.concurrent.TimeUnit;
 public class BinMarkers extends AppCompatActivity implements OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
-    String url = "http://172.16.189.253/123.php";
+    String url = "http://172.16.184.29/123.php";
 
     ArrayList<String> lat=new ArrayList<>();    //used in downloader() fn.
     ArrayList<String> lng=new ArrayList<>();    //used in downloader() fn.

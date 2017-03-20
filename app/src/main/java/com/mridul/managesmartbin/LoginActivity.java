@@ -38,8 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this,Register.class));
     }
 
-/*    public void gotoAfterLogin(View view){
-        startActivity(new Intent(this,AfterLogin.class));
-    }*/
+    public void forgotPasswordLayout(View view){
+        startActivity(new Intent(this,ForgotPassword.class));
+    }
 
 }

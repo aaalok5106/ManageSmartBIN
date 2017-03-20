@@ -42,7 +42,7 @@ public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 
-        String bin_register_url = "http://172.16.189.253/install_bin.php";
+        String bin_register_url = "http://172.16.184.29/install_bin.php";
 
         if (type.equals("installBinData")){
             String placeId = params[1];

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Manage SmartBIN</string>
 
+
+    <string name="open_navdrawer_afterlogin">Open</string>
+    <string name="close_navdrawer_afterlogin">Close</string>
+
 </resources>

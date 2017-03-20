@@ -1,6 +1,7 @@
 package com.mridul.managesmartbin;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -32,6 +33,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     Context context;
     //AlertDialog alertDialog;
+    ProgressDialog progressDialog;
+
     BackgroundWorker(Context context1){
         context = context1;
     }
@@ -40,9 +43,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 //        TYPE = "" + params[0];
-        String login_url = "http://172.16.189.253/login.php";
-        String register_url = "http://172.16.189.253/register.php";
-        String delete_url = "http://172.16.189.253/deletebin.php";
+        String login_url = "http://172.16.184.29/login.php";
+        String register_url = "http://172.16.184.29/register.php";
+        String delete_url = "http://172.16.184.29/deletebin.php";
+        String resetPassword_url = "http://172.16.184.29/mailer/reset-password-send-mail.php";
 
         if (type.equals("login")) {
             String email = params[1];
@@ -167,7 +171,44 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
 
+        }
+        else if (type.equals("resetpassword")) {
+            String email = params[1];
 
+            URL url = null;
+            try {
+                url = new URL(resetPassword_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postdata = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+                bufferedWriter.write(postdata);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
         }
@@ -179,6 +220,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
         //alertDialog = new AlertDialog.Builder(context).create();
         //alertDialog.setTitle("Status");
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("Please Wait...");
+        progressDialog.setMessage("Work in Progress");
+        progressDialog.show();
 
     }
 
@@ -187,6 +232,9 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
         //alertDialog.setMessage(result);
         //alertDialog.show();
+        progressDialog.dismiss();
+
+
         Toast.makeText(context,result,Toast.LENGTH_LONG).show();
 
         if(result.equals("You are successfully Logged In")) {
