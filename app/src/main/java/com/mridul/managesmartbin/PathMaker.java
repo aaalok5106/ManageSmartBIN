@@ -1,6 +1,7 @@
 package com.mridul.managesmartbin;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -46,7 +47,8 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
     private List<Marker> originMarkers = new ArrayList<>();
     private List<Marker> destinationMarkers = new ArrayList<>();
     private List<Polyline> polylinePaths = new ArrayList<>();
-    //private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,25 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
         btnFindPath.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendRequest();
+                progressDialog = new ProgressDialog(PathMaker.this);
+                progressDialog.setTitle("Please wait");
+                progressDialog.setMessage("Path making in progress...");
+                progressDialog.show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            //Thread.sleep(5000);
+                            sendRequest();
+                        }catch (Exception e){
+                            //...........
+                        }
+                        progressDialog.dismiss();
+                    }
+                }).start();
+
+                //sendRequest();
+                //progressDialog.dismiss();
             }
         });
     }
@@ -70,7 +90,8 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
     private void sendRequest() {
 
 
-        String[] checking = {"25.538794,84.850326","25.534607,84.853888","25.538944,84.858813", "25.543116,84.862117", "25.547724,84.863919", "25.554132,84.869112"};
+        String[] checking = {"25.538794,84.850326","25.534607,84.853888","25.538944,84.858813","25.543116,84.862117", "25.547724,84.863919", "25.554132,84.869112"};
+
         for(int i = 0; i < 5 ; i++){
             String origin = checking[i];
             String destination = checking[i+1];
@@ -83,6 +104,7 @@ public class PathMaker extends FragmentActivity implements OnMapReadyCallback, D
         }
 
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

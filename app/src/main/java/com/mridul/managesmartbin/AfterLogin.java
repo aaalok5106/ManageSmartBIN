@@ -4,6 +4,7 @@ package com.mridul.managesmartbin;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ import com.mridul.managesmartbin.placepicker.PickerHome;
  * This class will be used for works related to activity that opens just after LOGIN.
  */
 
-public class AfterLogin extends AppCompatActivity {
+public class AfterLogin extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
     // proceed to activity where you can see location of all installed bins.
@@ -83,22 +84,23 @@ public class AfterLogin extends AppCompatActivity {
 
         // for navigation Drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout_afterlogin);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open_navdrawer_afterlogin,R.string.close_navdrawer_afterlogin);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_navdrawer_afterlogin,R.string.close_navdrawer_afterlogin);
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
 
 
 
-/*
+
         navigationView = (NavigationView)findViewById(R.id.nav_view_afterlogin);
+        navigationView.setNavigationItemSelectedListener(this);
         //navigationView.inflateMenu(R.menu.afterlogin_navigation_menu);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected( MenuItem item) {
                 //Log.d("setting listener","fdsf");
@@ -129,6 +131,16 @@ public class AfterLogin extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout d = (DrawerLayout)findViewById(R.id.drawerlayout_afterlogin);
+        if(d.isDrawerOpen(GravityCompat.START)){
+            d.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 
 
     // for toolbar menu items
@@ -197,6 +209,8 @@ public class AfterLogin extends AppCompatActivity {
 
 
 
+
+
     // proceed to activity where you can create path connecting bins.
     // it is called directly on clicking button .
     public void gotoPathMakerLayout(View view){
@@ -204,5 +218,30 @@ public class AfterLogin extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.navigation_item1:
+                // handle clicks here
+                Toast.makeText(AfterLogin.this,"navigation_item2 Clicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.navigation_item2:
+                // handle clicks here
+                Toast.makeText(AfterLogin.this,"navigation_item2 Clicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.navigation_item3:
+                // handle clicks here
+                Toast.makeText(AfterLogin.this,"navigation_item3 Clicked",Toast.LENGTH_LONG).show();
+                break;
+            case R.id.navigation_logout:
+                // handle clicks here
+                startActivity(new Intent(AfterLogin.this,LoginActivity.class));
+                Toast.makeText(AfterLogin.this,"You have successfully Logged Out",Toast.LENGTH_LONG).show();
+                break;
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerlayout_afterlogin);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
 }
 

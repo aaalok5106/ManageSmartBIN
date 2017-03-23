@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:animateLayoutChanges="true"
-        android:background="#2cb59a"
+        android:background="#b4a88a"
         android:clickable="true"
         app:headerLayout="@layout/activity_after_login_navigation_header"
         app:menu="@menu/afterlogin_navigation_menu"
@@ -24,7 +24,8 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#7cb0e3">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"

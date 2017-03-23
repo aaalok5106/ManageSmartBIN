@@ -43,10 +43,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 //        TYPE = "" + params[0];
-        String login_url = "http://172.16.184.29/login.php";
-        String register_url = "http://172.16.184.29/register.php";
-        String delete_url = "http://172.16.184.29/deletebin.php";
-        String resetPassword_url = "http://172.16.184.29/mailer/reset-password-send-mail.php";
+        String login_url = "http://172.16.179.167/login.php";
+        String register_url = "http://172.16.179.167/register.php";
+        String delete_url = "http://172.16.179.167/deletebin.php";
+        String resetPassword_url = "http://172.16.179.167/mailer/reset-password-send-mail.php";
 
         if (type.equals("login")) {
             String email = params[1];
@@ -221,8 +221,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
         //alertDialog = new AlertDialog.Builder(context).create();
         //alertDialog.setTitle("Status");
         progressDialog = new ProgressDialog(context);
-        progressDialog.setTitle("Please Wait...");
-        progressDialog.setMessage("Work in Progress");
+        progressDialog.setTitle("Please Wait");
+        progressDialog.setMessage("Request in Progress...");
         progressDialog.show();
 
     }
