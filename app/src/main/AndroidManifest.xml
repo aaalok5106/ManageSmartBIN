@@ -47,7 +47,10 @@
         <activity android:name=".BinMarkers" />
         <activity android:name=".placepicker.PickerHome" />
         <activity android:name=".PathMaker" />
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name=".ForgotPassword" />
+        <activity
+            android:name=".AfterLogin1"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
