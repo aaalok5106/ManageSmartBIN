@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,45 +17,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mridul.managesmartbin.placepicker.PickerHome;
 
+import static com.mridul.managesmartbin.BackgroundWorker.OPEN_FRAGMENT_ACCOUNT_INFO;
+
 public class AfterLogin1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    // proceed to activity where you can see location of all installed bins.
-    // it is called from  onCreate .
-    public Button but1;
-    public void markInstalledBins(){
-        but1 = (Button)findViewById(R.id.mark_bins);
-
-        but1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLogin1.this,BinMarkers.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    // proceed to activity where you can install a bin on required location.
-    // it is called from  onCreate .
-    public Button but2;
-    public void placepickerlayout(){
-        but2 = (Button)findViewById(R.id.button_place_picker);
-
-        but2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AfterLogin1.this,PickerHome.class);
-                startActivity(intent);
-            }
-        });
-    }
+    public static Toolbar  toolbar;
 
 
+
+    private String EMAIL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,24 +39,19 @@ public class AfterLogin1 extends AppCompatActivity
 
 
 
-        markInstalledBins();
-        placepickerlayout();
 
-
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("ManageBin");
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,6 +61,17 @@ public class AfterLogin1 extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        displayFragment(R.id.navigation_home);
+
+        Intent i = getIntent();
+        EMAIL = i.getStringExtra("email");
+        View header = navigationView.getHeaderView(0);
+        TextView t = (TextView)header.findViewById(R.id.textView_nav_header) ;
+        t.append("\n"+EMAIL+"");
+//        t.setText(""+EMAIL+"");
+//        Log.d("email",EMAIL);
+
     }
 
     @Override
@@ -117,16 +102,19 @@ public class AfterLogin1 extends AppCompatActivity
             // for toolbar menu items
             case R.id.change_password:
                 // handle clicks here
-                Toast.makeText(this,"Change Password Clicked",Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"Change Password Clicked",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this,ChangePassword.class);
+                intent.putExtra("email", EMAIL);
+                startActivity(intent);
                 break;
-            case R.id.info:
+            /*case R.id.info:
                 // handle clicks here
                 Toast.makeText(this,"Info Clicked",Toast.LENGTH_LONG).show();
-                break;
+                break;*/
             case R.id.logout:
                 // handle clicks here
                 startActivity(new Intent(this,LoginActivity.class));
-                Toast.makeText(this,"You have successfully Logged Out",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You have successfully Logged Out"+EMAIL,Toast.LENGTH_LONG).show();
                 break;
         }
 
@@ -137,7 +125,7 @@ public class AfterLogin1 extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        switch(item.getItemId()){
+        /*switch(item.getItemId()){
             case R.id.navigation_item1:
                 // handle clicks here
                 Toast.makeText(this,"navigation_item2 Clicked",Toast.LENGTH_LONG).show();
@@ -153,18 +141,103 @@ public class AfterLogin1 extends AppCompatActivity
             case R.id.navigation_logout:
                 // handle clicks here
                 startActivity(new Intent(this,LoginActivity.class));
-                Toast.makeText(this,"You have successfully Logged Out",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You have successfully Logged Out"+EMAIL,Toast.LENGTH_LONG).show();
+                break;
+            case R.id.account_info:
+                // handle clicks here
+                String type="accountInfo";
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+                backgroundWorker.execute(type, EMAIL);
+                *//*startActivity(new Intent(this,AccountInfo.class));
+                Toast.makeText(this,"Your account info",Toast.LENGTH_LONG).show();*//*
+                break;
+            case R.id.app_info:
+                // handle clicks here
+                Toast.makeText(this,"app info Clicked",Toast.LENGTH_LONG).show();
                 break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.START);*/
+
+        displayFragment(item.getItemId());
         return true;
     }
 
 
+    public void displayFragment(int id){
+        android.support.v4.app.Fragment fragment = null;
 
-    public void gotoPathMakerLayout(View view){
+        switch (id){
+            case R.id.navigation_home:
+                fragment = new FragmentHome();
+                break;
+            case R.id.navigation_bin_locations:
+                fragment = new FragmentBinMarkers();
+                break;
+            case R.id.navigation_pickerHome:
+                //
+                Intent intent = new Intent(this, PickerHome.class);
+                startActivity(intent);
+                break;
+            case R.id.navigation_pathMaker:
+                //
+                Intent intent1 = new Intent(this, PathMaker.class);
+                startActivity(intent1);
+                break;
+            case R.id.account_info:
+                // handle clicks here
+                String type="accountInfo";
+
+                BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+                backgroundWorker.execute(type, EMAIL);
+
+
+                if (OPEN_FRAGMENT_ACCOUNT_INFO ==1){
+                    fragment = new FragmentAccountInfo();
+                }else{
+                    //
+                }
+
+                break;
+            case R.id.app_info:
+                // handle clicks here
+                Toast.makeText(this,"app info Clicked",Toast.LENGTH_LONG).show();
+                break;
+        }
+
+        if(fragment != null){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_after_login1, fragment );
+            fragmentTransaction.commit();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
+
+
+    // proceed to activity where you can see location of all installed bins.
+
+
+    protected void markInstalledBins(View view){
+        Intent intent = new Intent(AfterLogin1.this,BinMarkers.class);
+        startActivity(intent);
+    }
+
+    // proceed to activity where you can install a bin on required location.
+
+
+    protected void placepickerlayout(View view){
+        Intent intent = new Intent(AfterLogin1.this,PickerHome.class);
+        startActivity(intent);
+    }
+
+
+
+    protected void gotoPathMakerLayout(View view){
         startActivity(new Intent(this, PathMaker.class));
     }
 

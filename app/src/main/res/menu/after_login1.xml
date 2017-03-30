@@ -6,13 +6,9 @@
         android:orderInCategory="100"
         app:showAsAction="never" />
 
-    <item android:id="@+id/info"
-        android:title="Info"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
 
     <item android:id="@+id/logout"
         android:title="Logout"
         android:orderInCategory="100"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
 </menu>

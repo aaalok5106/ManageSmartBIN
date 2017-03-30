@@ -42,7 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AfterLogin" />
         <activity android:name=".Register" />
         <activity android:name=".BinMarkers" />
         <activity android:name=".placepicker.PickerHome" />
@@ -50,7 +49,9 @@
         <activity android:name=".ForgotPassword" />
         <activity
             android:name=".AfterLogin1"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".AccountInfo" />
+        <activity android:name=".ChangePassword"></activity>
     </application>
 
 </manifest>

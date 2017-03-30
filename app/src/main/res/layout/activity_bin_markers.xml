@@ -11,15 +11,6 @@ android:paddingRight="1dp"
 android:paddingTop="1dp"
 tools:context="com.mridul.managesmartbin.BinMarkers">
 
-<!--
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:inputType="textPersonName"
-    android:hint="Enter a Location name"
-    android:ems="10"
-    android:id="@+id/editText" />
--->
 <Button
     android:text="Locate All Bins"
     android:layout_width="wrap_content"
