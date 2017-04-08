@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="intro_title">PlacePicker Sample</string>
+<resources>
+    <string name="intro_title">PlacePicker Sample</string>
 
-    <string name="pick_title">Pick a place for Bin</string>
-    <string name="pick_text">Clicking below opens the place picker dialog.
-\nIt should be used by Admin to INSTALL a bin at required position. Its location will be recorded on the server for furthur processing.</string>
-    <string name="pick_action">Pick a place</string>
+    <string name="pick_title">Pick a Place to Install Bin</string>
+    <string name="pick_text">Clicking #PICK A PLACE# opens the place picker Window.
+\n\nIt should be used by Admin to INSTALL a bin at required position. Its location will be recorded on the server for future processing.
+    \n\nNOTE : Chosen location will be treated as an actual BIN Installed at that position. So, it must be ensured that an Actual BIN is at that Location</string>
+
+
+
+    <string name="pick_action">Pick a Place</string>
 
     <string name="detail_text">Place id: %1$s\nAddress: %2$s\nPhone: %3$s\n\n%4$s</string>
 

@@ -3,13 +3,13 @@ package com.mridul.managesmartbin;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by Mridul on 29-03-2017.
- */
+import static com.mridul.managesmartbin.BackgroundWorker.CURRENT_USER_EMAIL;
+
 
 public class FragmentHome extends Fragment {
 
@@ -24,6 +24,12 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         AfterLogin1.toolbar.setTitle("SmartBin Home");
+
+
+        //Log.d("current email", ""+email_user);
+        String type="accountInfo";
+        BackgroundWorker backgroundWorker = new BackgroundWorker(getContext());
+        backgroundWorker.execute(type, CURRENT_USER_EMAIL);
 
         return v;
     }

@@ -50,8 +50,6 @@ import java.util.ArrayList;
 
 public class FragmentBinMarkers extends Fragment implements OnMapReadyCallback{
 
-    private Activity activity = new Activity();
-
 
     /*@Override
     public void onCreate( Bundle savedInstanceState) {
@@ -76,7 +74,7 @@ public class FragmentBinMarkers extends Fragment implements OnMapReadyCallback{
 */
 
     GoogleMap mGoogleMap;
-    String url = "http://172.16.186.227/123.php";
+    String url = "http://172.16.190.235/123.php";
 
     ArrayList<String> lat=new ArrayList<>();    //used in downloader() fn.
     ArrayList<String> lng=new ArrayList<>();    //used in downloader() fn.
@@ -102,7 +100,7 @@ public class FragmentBinMarkers extends Fragment implements OnMapReadyCallback{
                 @Override
                 public void onClick(View v) {
                     try {
-                        locateBin(v);
+                        locateBinNew(v);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -166,7 +164,7 @@ public class FragmentBinMarkers extends Fragment implements OnMapReadyCallback{
         mGoogleMap.moveCamera(update);
     }
 
-    public void locateBin(View view) throws IOException {
+    public void locateBinNew(View view) throws IOException {
 
         //permitting network on existing thread...
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());

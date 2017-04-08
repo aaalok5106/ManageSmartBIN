@@ -35,24 +35,33 @@ public class FragmentAccountInfo extends Fragment {
 
         HashMap<String, String> hashMap = new HashMap<>();
 
+        String email_user = getArguments().getString("email_current_user");
+        String mob_no_user = getArguments().getString("mob_no_current_user");
+        String name_user = getArguments().getString("name_current_user");
+        /*String type="accountInfo";
+        BackgroundWorker backgroundWorker = new BackgroundWorker(getContext());
+        backgroundWorker.execute(type, email_user);*/
 
-        hashMap.put("E-mail :", ACCOUNT_INFO_json_EMAIL);
-        hashMap.put("Mobile No. :", ACCOUNT_INFO_json_MOB_NO);
-        hashMap.put("Name :", ACCOUNT_INFO_json_NAME);
 
-        List<HashMap<String, String>> listItems = new ArrayList<>();
-        SimpleAdapter adapter = new SimpleAdapter(getContext(), listItems,R.layout.list_item_account_info, new String[]{"First Line","Second Line"}, new int[]{R.id.item,R.id.sub_item});
 
-        Iterator it = hashMap.entrySet().iterator();
-        while (it.hasNext()){
-            HashMap<String , String> h = new HashMap<>();
-            Map.Entry pair = (Map.Entry)it.next();
-            h.put("First Line",pair.getKey().toString());
-            h.put("Second Line", pair.getValue().toString());
-            listItems.add(h);
-        }
+            hashMap.put("E-mail :", email_user);
+            hashMap.put("Mobile No. :", mob_no_user);
+            hashMap.put("Name :", name_user);
 
-        listView.setAdapter(adapter);
+
+            List<HashMap<String, String>> listItems = new ArrayList<>();
+            SimpleAdapter adapter = new SimpleAdapter(getContext(), listItems, R.layout.list_item_account_info, new String[]{"First Line", "Second Line"}, new int[]{R.id.item, R.id.sub_item});
+
+            Iterator it = hashMap.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap<String, String> h = new HashMap<>();
+                Map.Entry pair = (Map.Entry) it.next();
+                h.put("First Line", pair.getKey().toString());
+                h.put("Second Line", pair.getValue().toString());
+                listItems.add(h);
+            }
+
+            listView.setAdapter(adapter);
 
         return v;
     }

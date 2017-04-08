@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 
+import com.mridul.managesmartbin.AfterLogin1;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+
 
 /**
  *
@@ -42,7 +45,7 @@ public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 
-        String bin_register_url = "http://172.16.181.122/install_bin.php";
+        String bin_register_url = "http://172.16.181.243/install_bin.php";
 
         if (type.equals("installBinData")){
             String placeId = params[1];
@@ -102,8 +105,10 @@ public class BackgroundWorkerPicker extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String result) {
 
+
         alertDialog.setMessage(result);
         alertDialog.show();
+
         // AfterLoginLayout();
         //alertDialog.dismiss();
 

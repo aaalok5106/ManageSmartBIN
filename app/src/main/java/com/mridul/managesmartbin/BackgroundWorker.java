@@ -1,44 +1,29 @@
 package com.mridul.managesmartbin;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.List;
+
 
 /**
  * Presently this class is used to fetch data from server for login and user_registration & much more.
@@ -46,10 +31,12 @@ import java.util.List;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
+    public static String CURRENT_USER_EMAIL;
+
     Context context;
     //AlertDialog alertDialog;
     ProgressDialog progressDialog;
-    protected  String EMAIL;
+    //protected  String EMAIL;
     protected  String json_NAME;
     protected  String json_EMAIL;
     protected  String json_MOB_NO;
@@ -63,16 +50,18 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String type = params[0];
 
-        String login_url = "http://172.16.186.227/login.php";
-        String register_url = "http://172.16.186.227/register.php";
-        String delete_url = "http://172.16.186.227/deletebin.php";
-        String resetPassword_url = "http://172.16.186.227/mailer/reset-password-send-mail.php";
-        String accountInfo_url = "http://172.16.186.227/account-info.php";
-        String changePassword_url = "http://172.16.186.227/change-password.php";
+        String login_url = "http://172.16.190.235/login.php";
+        String register_url = "http://172.16.190.235/register.php";
+        String delete_url = "http://172.16.190.235/deletebin.php";
+        String resetPassword_url = "http://172.16.190.235/mailer/reset-password-send-mail.php";
+        String accountInfo_url = "http://172.16.190.235/account-info.php";
+        String changePassword_url = "http://172.16.190.235/change-password.php";
+        String path_starting_point_url = "http://172.16.190.235/install_bin.php";
+        String path_ending_point_url = "http://172.16.190.235/install_bin.php";
 
         if (type.equals("login")) {
             String email = params[1];
-            EMAIL = email;
+            CURRENT_USER_EMAIL = email;
             String password = params[2];
             URL url = null;
             try {
@@ -333,6 +322,98 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 e.printStackTrace();
             }
         }
+        else if (type.equals("pathStartingPosition")){
+            String placeId = params[1];
+            String name = params[2];
+            String address = params[3];
+            String lat = params[4];
+            String lng = params[5];
+
+            URL url = null;
+            try {
+                url = new URL(path_starting_point_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postdata = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(placeId, "UTF-8") + "&"
+                        + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&"
+                        + URLEncoder.encode("mob_no", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8") + "&"
+                        + URLEncoder.encode("lat", "UTF-8") + "=" + URLEncoder.encode(lat, "UTF-8") + "&"
+                        + URLEncoder.encode("lng", "UTF-8") + "=" + URLEncoder.encode(lng, "UTF-8");
+                bufferedWriter.write(postdata);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if (type.equals("pathEndingPosition")){
+            String placeId = params[1];
+            String name = params[2];
+            String address = params[3];
+            String lat = params[4];
+            String lng = params[5];
+
+            URL url = null;
+            try {
+                url = new URL(path_ending_point_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postdata = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(placeId, "UTF-8") + "&"
+                        + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&"
+                        + URLEncoder.encode("mob_no", "UTF-8") + "=" + URLEncoder.encode(address, "UTF-8") + "&"
+                        + URLEncoder.encode("lat", "UTF-8") + "=" + URLEncoder.encode(lat, "UTF-8") + "&"
+                        + URLEncoder.encode("lng", "UTF-8") + "=" + URLEncoder.encode(lng, "UTF-8");
+                bufferedWriter.write(postdata);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return result;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return null ;
     }
 
@@ -341,6 +422,8 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
         //alertDialog = new AlertDialog.Builder(context).create();
         //alertDialog.setTitle("Status");
+
+
         progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("Please Wait");
         progressDialog.setMessage("Request in Progress...");
@@ -348,26 +431,28 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     }
 
-    public static int OPEN_FRAGMENT_ACCOUNT_INFO = 0 ;
-    public static String ACCOUNT_INFO_json_EMAIL;
-    public static String ACCOUNT_INFO_json_NAME;
-    public static String ACCOUNT_INFO_json_MOB_NO;
+    //public static int OPEN_FRAGMENT_ACCOUNT_INFO = 0 ;
+    public static String ACCOUNT_INFO_json_EMAIL = "";
+    public static String ACCOUNT_INFO_json_NAME = "";
+    public static String ACCOUNT_INFO_json_MOB_NO = "";
 
     @Override
     protected void onPostExecute(String result) {
 
         //alertDialog.setMessage(result);
         //alertDialog.show();
+
         progressDialog.dismiss();
 
-
-        Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+        if( !result.equals("Your Account Info") ) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        }
 
         if(result.equals("Your Account Info")){
             // show information about user's account here...
             //gotoAccountInfoLayout();
 
-            OPEN_FRAGMENT_ACCOUNT_INFO = 1;
+            //OPEN_FRAGMENT_ACCOUNT_INFO = 1;
             ACCOUNT_INFO_json_EMAIL = json_EMAIL ;
             ACCOUNT_INFO_json_NAME = json_NAME ;
             ACCOUNT_INFO_json_MOB_NO = json_MOB_NO ;
@@ -384,7 +469,10 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
             // Do nothing.
         }else if(result.equals("Password successfully changed") || result.equals("Your OLD password do not match") || result.equals("Database insertion ERROR !")){
             // Do nothing.
-        } else {
+        }else if(result.equals("Bin Position successfully inserted on server") || result.equals("Error Inserting Bin-Data on Server")){
+            // Do nothing.
+        }
+        else {
             /**
              * else returning to login page again...
              * After registration , also , returning to login activity...
@@ -402,7 +490,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
     private void openAfterLogin() {
         Intent intent = new Intent(context,AfterLogin1.class);
-        intent.putExtra("email",EMAIL);
+        /*intent.putExtra("email",EMAIL);*/
         context.startActivity(intent);
     }
 

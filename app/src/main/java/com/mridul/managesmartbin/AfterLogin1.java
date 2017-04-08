@@ -2,9 +2,6 @@ package com.mridul.managesmartbin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
@@ -22,16 +19,22 @@ import android.widget.Toast;
 
 import com.mridul.managesmartbin.placepicker.PickerHome;
 
-import static com.mridul.managesmartbin.BackgroundWorker.OPEN_FRAGMENT_ACCOUNT_INFO;
+import static com.mridul.managesmartbin.BackgroundWorker.ACCOUNT_INFO_json_MOB_NO;
+import static com.mridul.managesmartbin.BackgroundWorker.ACCOUNT_INFO_json_NAME;
+import static com.mridul.managesmartbin.BackgroundWorker.CURRENT_USER_EMAIL;
+
+
+//import static com.mridul.managesmartbin.BackgroundWorker.OPEN_FRAGMENT_ACCOUNT_INFO;
+
 
 public class AfterLogin1 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static Toolbar  toolbar;
+    public static Toolbar toolbar;
+
+    //private String EMAIL;
 
 
-
-    private String EMAIL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,13 +67,13 @@ public class AfterLogin1 extends AppCompatActivity
 
         displayFragment(R.id.navigation_home);
 
-        Intent i = getIntent();
-        EMAIL = i.getStringExtra("email");
+        /*Intent i = getIntent();
+        CURRENT_USER_EMAIL = i.getStringExtra("email");*/
         View header = navigationView.getHeaderView(0);
         TextView t = (TextView)header.findViewById(R.id.textView_nav_header) ;
-        t.append("\n"+EMAIL+"");
-//        t.setText(""+EMAIL+"");
-//        Log.d("email",EMAIL);
+        t.append("\n"+CURRENT_USER_EMAIL+"");
+//        t.setText(""+CURRENT_USER_EMAIL+"");
+//        Log.d("email",CURRENT_USER_EMAIL);
 
     }
 
@@ -104,7 +107,7 @@ public class AfterLogin1 extends AppCompatActivity
                 // handle clicks here
                 //Toast.makeText(this,"Change Password Clicked",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this,ChangePassword.class);
-                intent.putExtra("email", EMAIL);
+                intent.putExtra("email", CURRENT_USER_EMAIL);
                 startActivity(intent);
                 break;
             /*case R.id.info:
@@ -114,7 +117,7 @@ public class AfterLogin1 extends AppCompatActivity
             case R.id.logout:
                 // handle clicks here
                 startActivity(new Intent(this,LoginActivity.class));
-                Toast.makeText(this,"You have successfully Logged Out"+EMAIL,Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"You have successfully Logged Out "+CURRENT_USER_EMAIL,Toast.LENGTH_LONG).show();
                 break;
         }
 
@@ -178,27 +181,39 @@ public class AfterLogin1 extends AppCompatActivity
                 break;
             case R.id.navigation_pickerHome:
                 //
-                Intent intent = new Intent(this, PickerHome.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(this, PickerHome.class);
+                startActivity(intent);*/
+                fragment = new FragmentPlacePickerStart();
                 break;
             case R.id.navigation_pathMaker:
                 //
                 Intent intent1 = new Intent(this, PathMaker.class);
                 startActivity(intent1);
+                /*fragment = new FragmentPathMaker();*/
+                break;
+            case R.id.navigation_path_start_pos:
+                //
+                fragment = new FragmentPlacePickerStart();
                 break;
             case R.id.account_info:
                 // handle clicks here
-                String type="accountInfo";
+               /* String type="accountInfo";
 
                 BackgroundWorker backgroundWorker = new BackgroundWorker(this);
                 backgroundWorker.execute(type, EMAIL);
-
 
                 if (OPEN_FRAGMENT_ACCOUNT_INFO ==1){
                     fragment = new FragmentAccountInfo();
                 }else{
                     //
-                }
+                }*/
+                Bundle bundle = new Bundle();
+                bundle.putString("email_current_user", CURRENT_USER_EMAIL);
+                bundle.putString("mob_no_current_user", ACCOUNT_INFO_json_MOB_NO);
+                bundle.putString("name_current_user", ACCOUNT_INFO_json_NAME);
+
+                fragment = new FragmentAccountInfo();
+                fragment.setArguments(bundle);
 
                 break;
             case R.id.app_info:
@@ -206,6 +221,7 @@ public class AfterLogin1 extends AppCompatActivity
                 Toast.makeText(this,"app info Clicked",Toast.LENGTH_LONG).show();
                 break;
         }
+
 
         if(fragment != null){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -231,8 +247,8 @@ public class AfterLogin1 extends AppCompatActivity
 
 
     protected void placepickerlayout(View view){
-        Intent intent = new Intent(AfterLogin1.this,PickerHome.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(AfterLogin1.this,PickerHome.class);
+        startActivity(intent);*/
     }
 
 

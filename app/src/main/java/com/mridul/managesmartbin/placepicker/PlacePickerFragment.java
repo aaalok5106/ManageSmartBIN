@@ -21,9 +21,6 @@ import com.mridul.managesmartbin.placepicker.cardstream.CardStreamFragment;
 import com.mridul.managesmartbin.placepicker.cardstream.OnCardClickListener;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.Iterator;
-import java.util.List;
-
 
 public class PlacePickerFragment extends Fragment implements OnCardClickListener {
 
@@ -35,7 +32,6 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
     private final StringBuffer mPlaceTypeDisplayBuffer = new StringBuffer();
 
     // Tags for cards
-    private static final String CARD_INTRO = "INTRO";
     private static final String CARD_PICKER = "PICKER";
     private static final String CARD_DETAIL = "DETAIL";
 
@@ -149,10 +145,10 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
                     attribution = "";
                 }
 
-                //updating data on server with the use of BackgroundWorkerPicker class .
-                String type = "installBinData";
-                BackgroundWorkerPicker backgroundWorker = new BackgroundWorkerPicker(getContext());
-                backgroundWorker.execute(type,placeId,name,address,lat.toString(),lng.toString());
+                    String type = "installBinData";
+                    BackgroundWorkerPicker backgroundWorker = new BackgroundWorkerPicker(getContext());
+                    backgroundWorker.execute(type, placeId, name, address, lat.toString(), lng.toString());
+
 
 
                 // Update data on card to show which place is selected .
@@ -183,13 +179,15 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
      */
     private void initialiseCards() {
         // Add picker card.
-        Card c = new Card.Builder(this, CARD_PICKER)
-                .setTitle(getString(R.string.pick_title))
-                .setDescription(getString(R.string.pick_text))
-                .addAction(getString(R.string.pick_action), ACTION_PICK_PLACE, Card.ACTION_NEUTRAL)
-                .setLayout(R.layout.card_google)
-                .build(getActivity());
-        getCardStream().addCard(c, false);
+        Card c ;
+            c = new Card.Builder(this, CARD_PICKER)
+                    .setTitle(getString(R.string.pick_title))
+                    .setDescription(getString(R.string.pick_text))
+                    .addAction(getString(R.string.pick_action), ACTION_PICK_PLACE, Card.ACTION_NEUTRAL)
+                    .setLayout(R.layout.card_google)
+                    .build(getActivity());
+            getCardStream().addCard(c, false);
+
 
         // Add detail card for showing selected place .
         c = new Card.Builder(this, CARD_DETAIL)
@@ -198,12 +196,6 @@ public class PlacePickerFragment extends Fragment implements OnCardClickListener
                 .build(getActivity());
         getCardStream().addCard(c, false);
 
-        // Add and show introduction card.
-       /* c = new Card.Builder(this, CARD_INTRO)
-                .setTitle(getString(R.string.intro_title))
-                .setDescription(getString(R.string.intro_message))
-                .build(getActivity());
-        getCardStream().addCard(c, true);*/
     }
 
     /**
